@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BAIR</title>
+  <style>
+    :root {
+      --primary-dark: #1a1a1a;
+      --accent-green: #4a7c59;
+      --accent-green-light: #88b04b;
+      --text-light: #ffffff;
+      --overlay-dark: rgba(0, 0, 0, 0.6);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1a1a1a 40%, #2e4d35 100%);
+      background-attachment: fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: var(--text-light);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--overlay-dark);
+      border: none;
+      color: var(--text-light);
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .menu {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: var(--overlay-dark);
+      border: 2px solid var(--accent-green);
+      border-radius: 8px;
+      padding: 10px;
+      display: none;
+      z-index: 999;
+    }
+
+    .menu a {
+      color: var(--accent-green-light);
+      text-decoration: none;
+      display: block;
+      margin: 5px 0;
+    }
+
+    .content {
+      background-color: var(--overlay-dark);
+      padding: 2rem;
+      border-radius: 10px;
+      border: 2px solid var(--accent-green);
+      text-align: center;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 0 15px rgba(72, 120, 80, 0.6);
+    }
+
+    .logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      color: var(--accent-green-light);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--text-light);
+    }
+  </style>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</head>
+<body>
+  <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
+  <div id="menu" class="menu">
+    <a href="#">Home</a>
+    <a href="#">Map</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Authorized Individuals</a>
+  </div>
+
+  <div class="content">
+    <img src="BairLogo.png" alt="BAIR Logo" class="logo" />
+    <h1>Bair Family Property</h1>
+    <p>If you are reading this message, you have entered the private property of the Bair family. This land is not open to the public, and unauthorized access is strictly prohibited. By continuing beyond this point, you are trespassing and may be subject to legal consequences. Please respect our privacy and leave immediately.</p>
+  </div>
+</body>
+</html>
