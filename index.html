@@ -17,8 +17,6 @@
       margin: 0;
       padding: 0;
       background: linear-gradient(135deg, #1a1a1a 40%, #2e4d35 100%);
-      background-attachment: fixed;
-      background-size: cover;
       font-family: Arial, sans-serif;
       color: var(--text-light);
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -30,7 +28,7 @@
     }
 
     .menu-toggle {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
       background-color: var(--overlay-dark);
@@ -39,11 +37,11 @@
       padding: 10px 15px;
       border-radius: 5px;
       cursor: pointer;
-      z-index: 1000;
+      z-index: 1001;
     }
 
     .menu {
-      position: absolute;
+      position: fixed;
       top: 60px;
       right: 20px;
       background-color: var(--overlay-dark);
@@ -51,7 +49,7 @@
       border-radius: 8px;
       padding: 10px;
       display: none;
-      z-index: 999;
+      z-index: 1000;
     }
 
     .menu a {
@@ -72,6 +70,7 @@
       flex-direction: column;
       align-items: center;
       box-shadow: 0 0 15px rgba(72, 120, 80, 0.6);
+      margin-top: 100px;
     }
 
     .logo {
@@ -89,89 +88,45 @@
       color: var(--text-light);
     }
   </style>
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-  </script>
 </head>
 <body>
+
   <!-- Menu Button -->
-<button class="menu-toggle" onclick="toggleMenu()">Menu</button>
+  <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
 
-<!-- Slide-down Menu -->
-<div id="menu" class="menu">
-  <a href="index.html">Home</a>
-  <a href="map.html">Map</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="authorized.html">Authorized Individuals</a>
-</div>
+  <!-- Menu Links -->
+  <div id="menu" class="menu">
+    <a href="index.html">Home</a>
+    <a href="map.html">Map</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="authorized.html">Authorized Individuals</a>
+  </div>
 
-
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("menu");
-    if (menu.style.display === "block") {
-      menu.style.display = "none";
-    } else {
-      menu.style.display = "block";
-    }
-  }
-
-
-  window.addEventListener("click", function (event) {
-    const menu = document.getElementById("menu");
-    const button = document.querySelector(".menu-toggle");
-    if (!menu.contains(event.target) && !button.contains(event.target)) {
-      menu.style.display = "none";
-    }
-  });
-</script>
-
-
-<style>
-  .menu-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border: none;
-    color: #ffffff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1001;
-  }
-
-  .menu {
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border: 2px solid #4a7c59;
-    border-radius: 8px;
-    padding: 10px;
-    display: none;
-    z-index: 1000;
-  }
-
-  .menu a {
-    color: #88b04b;
-    text-decoration: none;
-    display: block;
-    margin: 5px 0;
-  }
-</style>
-
-
+  <!-- Main Content -->
   <div class="content">
     <img src="BairLogo.png" alt="BAIR Logo" class="logo" />
     <h1>Bair Family Property</h1>
     <p>If you are reading this message, you have entered the private property of the Bair family. This land is not open to the public, and unauthorized access is strictly prohibited. By continuing beyond this point, you are trespassing and may be subject to legal consequences. Please respect our privacy and leave immediately.</p>
   </div>
 
+  <!-- JavaScript to Handle Menu Toggle -->
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    window.addEventListener("click", function (event) {
+      const menu = document.getElementById("menu");
+      const button = document.querySelector(".menu-toggle");
+      if (!menu.contains(event.target) && !button.contains(event.target)) {
+        menu.style.display = "none";
+      }
+    });
+  </script>
+
+  <!-- Zapier Webhook -->
   <script>
     fetch("https://hooks.zapier.com/hooks/catch/22735894/2pqo9wr/", {
       method: "POST",
@@ -184,5 +139,7 @@
       })
     });
   </script>
+
 </body>
 </html>
+
