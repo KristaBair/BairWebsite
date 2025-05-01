@@ -111,5 +111,18 @@
     <h1>Bair Family Property</h1>
     <p>If you are reading this message, you have entered the private property of the Bair family. This land is not open to the public, and unauthorized access is strictly prohibited. By continuing beyond this point, you are trespassing and may be subject to legal consequences. Please respect our privacy and leave immediately.</p>
   </div>
+
+  <script>
+    fetch("https://hooks.zapier.com/hooks/catch/22735894/2pqo9wr/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        event: "Website visited",
+        timestamp: new Date().toISOString()
+      })
+    });
+  </script>
 </body>
 </html>
