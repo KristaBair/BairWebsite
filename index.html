@@ -97,14 +97,73 @@
   </script>
 </head>
 <body>
-  <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
-  <div id="menu" class="menu">
-    <a href="index.html">Home</a>
-    <a href="map.html">Map</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="authorized.html">Authorized Individuals</a>
-  </div>
+  <!-- Menu Button -->
+<button class="menu-toggle" onclick="toggleMenu()">Menu</button>
+
+<!-- Slide-down Menu -->
+<div id="menu" class="menu">
+  <a href="index.html">Home</a>
+  <a href="map.html">Map</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="authorized.html">Authorized Individuals</a>
+</div>
+
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    if (menu.style.display === "block") {
+      menu.style.display = "none";
+    } else {
+      menu.style.display = "block";
+    }
+  }
+
+
+  window.addEventListener("click", function (event) {
+    const menu = document.getElementById("menu");
+    const button = document.querySelector(".menu-toggle");
+    if (!menu.contains(event.target) && !button.contains(event.target)) {
+      menu.style.display = "none";
+    }
+  });
+</script>
+
+
+<style>
+  .menu-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .menu {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid #4a7c59;
+    border-radius: 8px;
+    padding: 10px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .menu a {
+    color: #88b04b;
+    text-decoration: none;
+    display: block;
+    margin: 5px 0;
+  }
+</style>
 
 
   <div class="content">
