@@ -19,14 +19,29 @@
       padding: 2rem;
     }
 
-    .menu {
-      position: absolute;
+    .menu-toggle {
+      position: fixed;
       top: 20px;
       right: 20px;
       background-color: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: #ffffff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .menu {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
       border: 2px solid #4a7c59;
       border-radius: 8px;
       padding: 10px;
+      display: none;
+      z-index: 1000;
     }
 
     .menu a {
@@ -44,6 +59,7 @@
       text-align: center;
       max-width: 800px;
       box-shadow: 0 0 15px rgba(72, 120, 80, 0.6);
+      margin-top: 100px;
     }
 
     h1, h2 {
@@ -68,7 +84,7 @@
 </head>
 <body>
 
-<!-- Dropdown Menu Toggle Button -->
+  <!-- Dropdown Menu Toggle Button -->
   <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
 
   <!-- Hidden Menu -->
@@ -108,5 +124,22 @@
     </div>
   </div>
 
+  <!-- Dropdown Toggle Script -->
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    window.addEventListener("click", function (event) {
+      const menu = document.getElementById("menu");
+      const button = document.querySelector(".menu-toggle");
+      if (!menu.contains(event.target) && !button.contains(event.target)) {
+        menu.style.display = "none";
+      }
+    });
+  </script>
+
 </body>
 </html>
+
