@@ -11,12 +11,13 @@
       --accent-green-light: #88b04b;
       --text-light: #ffffff;
       --overlay-dark: rgba(0, 0, 0, 0.6);
+      --background-light: #f5f2e7; /* MATCHED background */
     }
 
     body {
       margin: 0;
       padding: 0;
-      background: #f4f1e9;
+      background-color: var(--background-light);
       font-family: Georgia, serif;
       color: var(--primary-dark);
       display: flex;
@@ -29,7 +30,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem 2rem;
-      background-color: #f4f1e9;
+      background-color: var(--background-light);
       border-bottom: 2px solid var(--accent-green);
     }
 
