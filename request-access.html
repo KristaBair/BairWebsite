@@ -42,12 +42,19 @@
       position: fixed;
       top: 80px;
       right: 20px;
-      background-color: var(--overlay-dark);
+      background-color: rgba(0, 0, 0, 0.6);
       border: 2px solid var(--accent-green);
       border-radius: 8px;
       padding: 10px;
       display: none;
       z-index: 1000;
+    }
+
+    .menu a {
+      display: block;
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 5px 0;
     }
 
     .content {
@@ -154,6 +161,7 @@
     </form>
   </div>
 
+  <!-- JavaScript -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById("menu");
@@ -181,6 +189,9 @@
       const customReason = document.getElementById("customReason").value.trim();
       const reason = reasonSelect === "Other" ? customReason : reasonSelect;
 
+      // Debug log
+      console.log("Submitting:", { name, phone, reason });
+
       fetch("https://hooks.zapier.com/hooks/catch/22735894/2n5yvpn/", {
         method: "POST",
         headers: {
@@ -193,15 +204,19 @@
           timestamp: new Date().toISOString()
         })
       })
-      .then(response => {
-        if (!response.ok) throw new Error("Failed to submit");
+      .then(async (response) => {
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error("Zapier Error: " + errorText);
+        }
+
         document.getElementById("confirmation").style.display = "block";
         document.getElementById("accessForm").reset();
-        toggleCustomReason(); // Hide custom again
+        toggleCustomReason(); // reset custom reason visibility
       })
       .catch(error => {
-        alert("There was a problem submitting the form. Please try again.");
-        console.error(error);
+        console.error("Submission error:", error);
+        alert("There was a problem submitting the form. Please check the console (F12) for more info.");
       });
     });
   </script>
