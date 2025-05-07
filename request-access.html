@@ -107,7 +107,9 @@
   </style>
 </head>
 
-<!-- Header with Logo and Menu -->
+<body>
+
+  <!-- Header -->
   <div class="header">
     <img src="logo.png" alt="BAIR Logo" class="logo" />
     <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
@@ -121,15 +123,9 @@
     <a href="contact.html">Contact</a>
     <a href="authorized.html">Authorized Individuals</a>
     <a href="request-access.html">Request Access</a>
-
-  </div>
-  
-<body>
-
-  <div class="header">
-    <img src="logo.png" alt="BAIR Logo" class="logo" />
   </div>
 
+  <!-- Form Content -->
   <div class="content">
     <h1>Request Access</h1>
     <p>Please fill out the form below to request access to Bair Family Property. You will receive a response after review.</p>
@@ -159,6 +155,11 @@
   </div>
 
   <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
     function toggleCustomReason() {
       const reason = document.getElementById("reason").value;
       const custom = document.getElementById("customReason");
@@ -196,7 +197,7 @@
         if (!response.ok) throw new Error("Failed to submit");
         document.getElementById("confirmation").style.display = "block";
         document.getElementById("accessForm").reset();
-        toggleCustomReason(); // Hide custom field again
+        toggleCustomReason(); // Hide custom again
       })
       .catch(error => {
         alert("There was a problem submitting the form. Please try again.");
