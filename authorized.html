@@ -3,133 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authorized Individuals - Bair Family Property</title>
+  <title>Authorized Individuals - Bair Property</title>
   <style>
+    :root {
+      --primary-dark: #1a1a1a;
+      --accent-green: #4a7c59;
+      --accent-green-light: #88b04b;
+      --text-light: #ffffff;
+      --background-light: #f5f2e7;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #1a1a1a 40%, #2e4d35 100%);
-      font-family: Arial, sans-serif;
-      color: #ffffff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      background-color: var(--background-light);
+      font-family: Georgia, serif;
+      color: var(--primary-dark);
+    }
+
+    .header {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      padding: 2rem;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background-color: var(--background-light);
+      border-bottom: 2px solid var(--accent-green);
     }
 
-    .menu-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      border: none;
-      color: #ffffff;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    .menu {
-      position: fixed;
-      top: 60px;
-      right: 20px;
-      background-color: rgba(0, 0, 0, 0.8);
-      border: 2px solid #4a7c59;
-      border-radius: 8px;
-      padding: 10px;
-      display: none;
-      z-index: 1000;
-    }
-
-    .menu a {
-      color: #88b04b;
-      text-decoration: none;
-      display: block;
-      margin: 5px 0;
+    .logo {
+      height: 100px;
+      width: auto;
     }
 
     .content {
-      background-color: rgba(0, 0, 0, 0.6);
-      border: 2px solid #4a7c59;
-      border-radius: 10px;
+      max-width: 900px;
+      margin: 3rem auto;
       padding: 2rem;
-      text-align: center;
-      max-width: 600px;
-      box-shadow: 0 0 15px rgba(72, 120, 80, 0.6);
-      margin-top: 100px;
+      border: 2px solid var(--accent-green);
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
-      color: #88b04b;
+      color: var(--accent-green);
       margin-bottom: 1rem;
+      text-align: center;
     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 1rem 0;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
     }
 
-    li {
-      font-size: 1.2rem;
-      margin: 0.5rem 0;
-      color: #ffffff;
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
     }
 
-    .notice {
-      margin-top: 2rem;
-      font-style: italic;
-      color: #cccccc;
+    th {
+      background-color: var(--accent-green-light);
+      color: white;
+    }
+
+    td {
+      background-color: #fdfdfd;
     }
   </style>
 </head>
 <body>
 
-  <!-- Dropdown Menu Toggle Button -->
-  <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
-
-  <!-- Hidden Menu -->
-  <div id="menu" class="menu">
-    <a href="index.html">Home</a>
-    <a href="map.html">Map</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="authorized.html">Authorized Individuals</a>
-    <a href="request-access.html">Request Access</a>
+  <div class="header">
+    <img src="logo.png" alt="BAIR Logo" class="logo" />
   </div>
 
   <div class="content">
     <h1>Authorized Individuals</h1>
-    <p>The following families have been granted permission to access the Bair Family Property:</p>
-
-    <ul>
-      <li>The Bair Family</li>
-      <li>The Tyson Family</li>
-      <li>The Hickenbottom Family</li>
-      <li>The Cook Family</li>
-      <li>The Carter Family</li>
-    </ul>
-
-    <p class="notice">All other access is considered trespassing and is subject to legal enforcement.</p>
+    <p>This list is automatically updated when a request is approved.</p>
+    <table id="authorized-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Reason</th>
+          <th>Approved Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be inserted here -->
+      </tbody>
+    </table>
   </div>
 
-  <!-- JavaScript to Toggle Menu -->
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    async function loadSheet() {
+      const url = "https://docs.google.com/spreadsheets/d/1rZoNtbczRhgH9U4rMAzaYWztISMVJcK6HCK31fUNogI/gviz/tq?tqx=out:json";
+
+      try {
+        const res = await fetch(url);
+        const text = await res.text();
+        const json = JSON.parse(text.substring(47).slice(0, -2)); // Clean Google gviz response
+
+        const rows = json.table.rows;
+        const tableBody = document.querySelector("#authorized-table tbody");
+        rows.forEach(row => {
+          const name = row.c[0]?.v || '';
+          const phone = row.c[1]?.v || '';
+          const reason = row.c[2]?.v || '';
+          const date = row.c[3]?.v || '';
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${name}</td><td>${phone}</td><td>${reason}</td><td>${date}</td>`;
+          tableBody.appendChild(tr);
+        });
+      } catch (err) {
+        console.error("Failed to load sheet data", err);
+      }
     }
 
-    window.addEventListener("click", function (event) {
-      const menu = document.getElementById("menu");
-      const button = document.querySelector(".menu-toggle");
-      if (!menu.contains(event.target) && !button.contains(event.target)) {
-        menu.style.display = "none";
-      }
-    });
+    loadSheet();
   </script>
 
 </body>
