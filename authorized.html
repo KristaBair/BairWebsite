@@ -28,11 +28,41 @@
       padding: 1rem 2rem;
       background-color: var(--background-light);
       border-bottom: 2px solid var(--accent-green);
+      position: relative;
     }
 
     .logo {
       height: 100px;
       width: auto;
+    }
+
+    .menu-toggle {
+      background-color: var(--accent-green);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .menu {
+      position: absolute;
+      top: 100%;
+      right: 2rem;
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid var(--accent-green);
+      border-radius: 8px;
+      padding: 10px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .menu a {
+      display: block;
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 5px 0;
     }
 
     .content {
@@ -75,10 +105,21 @@
 </head>
 <body>
 
+  <!-- Header with Logo and Menu -->
   <div class="header">
     <img src="logo.png" alt="BAIR Logo" class="logo" />
+    <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
+    <div id="menu" class="menu">
+      <a href="index.html">Home</a>
+      <a href="map.html">Map</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="authorized.html">Authorized Individuals</a>
+      <a href="request-access.html">Request Access</a>
+    </div>
   </div>
 
+  <!-- Content Area -->
   <div class="content">
     <h1>Authorized Individuals</h1>
     <p>This list is automatically updated when a request is approved.</p>
@@ -97,24 +138,12 @@
     </table>
   </div>
 
-  <!-- Header with Logo and Menu -->
-  <div class="header">
-    <img src="logo.png" alt="BAIR Logo" class="logo" />
-    <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
-  </div>
-
-  <!-- Menu Links -->
-  <div id="menu" class="menu">
-    <a href="index.html">Home</a>
-    <a href="map.html">Map</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="authorized.html">Authorized Individuals</a>
-    <a href="request-access.html">Request Access</a>
-
-  </div>
-
   <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
     async function loadSheet() {
       const url = "https://docs.google.com/spreadsheets/d/1rZoNtbczRhgH9U4rMAzaYWztISMVJcK6HCK31fUNogI/gviz/tq?tqx=out:json";
 
@@ -144,4 +173,3 @@
 
 </body>
 </html>
-
