@@ -198,11 +198,11 @@
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          name: name,
-          phone: phone,
-          reason: reason,
-          timestamp: new Date().toISOString()
-        })
+        Name: name,
+        Phone: phone,
+        Reason: reason,
+        timestamp: new Date().toISOString()
+});
       })
       .then(async (response) => {
         if (!response.ok) {
