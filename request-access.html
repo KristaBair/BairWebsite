@@ -192,22 +192,23 @@
       // Debug log
       console.log("Submitting:", { name, phone, reason });
 
-      fetch("https://script.google.com/macros/s/AKfycbxYq1n-Po_u5tcAQbTtjuVySSvcqXV6V6CQztOwNs-7YOqR4IrkGcv0PQsi5eFeyCxc/exec", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-        Name: name,
-        Phone: phone,
-        Reason: reason,
-        timestamp: new Date().toISOString()
+      fetch("https://corsproxy.io/?" + encodeURIComponent("https://script.google.com/macros/s/AKfycbxYq1n-Po_u5tcAQbTtjuVySSvcqXV6V6CQztOwNs-7YOqR4IrkGcv0PQsi5eFeyCxc/exec"), {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    Name: name,
+    Phone: phone,
+    Reason: reason,
+    timestamp: new Date().toISOString()
+  })
 })
-      })
+
       .then(async (response) => {
         if (!response.ok) {
           const errorText = await response.text();
-          throw new Error("Zapier Error: " + errorText);
+          throw new Error("Scripts Error: " + errorText);
         }
 
         document.getElementById("confirmation").style.display = "block";
