@@ -137,15 +137,18 @@
     <h1>Request Access</h1>
     <p>Please fill out the form below to request access to Bair Family Property. You will receive a response after review.</p>
 
-    <form id="accessForm">
+    <form action="https://script.google.com/macros/s/AKfycbxYq1n-Po_u5tcAQbTtjuVySSvcqXV6V6CQztOwNs-7YOqR4IrkGcv0PQsi5eFeyCxc/exec"
+          method="POST"
+          target="hidden_iframe"
+          onsubmit="showConfirmation()">
       <label for="name">Full Name:</label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" name="Name" required />
 
       <label for="phone">Cell Phone:</label>
-      <input type="tel" id="phone" name="phone" placeholder="123-456-7890" required />
+      <input type="tel" id="phone" name="Phone" placeholder="123-456-7890" required />
 
       <label for="reason">Reason for Visit:</label>
-      <select id="reason" name="reason" onchange="toggleCustomReason()" required>
+      <select id="reason" name="Reason" onchange="toggleCustomReason()" required>
         <option value="" disabled selected>Select one</option>
         <option value="Hunting">Hunting</option>
         <option value="Hiking">Hiking</option>
@@ -154,11 +157,13 @@
         <option value="Other">Other (please specify below)</option>
       </select>
 
-      <textarea id="customReason" name="customReason" class="hidden" placeholder="Enter specific reason here..."></textarea>
+      <textarea id="customReason" name="CustomReason" class="hidden" placeholder="Enter specific reason here..."></textarea>
 
       <button type="submit">Submit Request</button>
       <div id="confirmation" class="confirmation">Thank you! Your request has been submitted.</div>
     </form>
+
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
   </div>
 
   <!-- JavaScript -->
@@ -180,47 +185,13 @@
       }
     }
 
-    document.getElementById("accessForm").addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const reasonSelect = document.getElementById("reason").value;
-      const customReason = document.getElementById("customReason").value.trim();
-      const reason = reasonSelect === "Other" ? customReason : reasonSelect;
-
-      // Debug log
-      console.log("Submitting:", { name, phone, reason });
-
-      fetch("https://corsproxy.io/?" + encodeURIComponent("https://script.google.com/macros/s/AKfycbxYq1n-Po_u5tcAQbTtjuVySSvcqXV6V6CQztOwNs-7YOqR4IrkGcv0PQsi5eFeyCxc/exec"), {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    Name: name,
-    Phone: phone,
-    Reason: reason,
-    timestamp: new Date().toISOString()
-  })
-})
-
-      .then(async (response) => {
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error("Scripts Error: " + errorText);
-        }
-
+    function showConfirmation() {
+      setTimeout(() => {
         document.getElementById("confirmation").style.display = "block";
-        document.getElementById("accessForm").reset();
-        toggleCustomReason(); // reset custom reason visibility
-      })
-      .catch(error => {
-        console.error("Submission error:", error);
-        alert("There was a problem submitting the form. Please check the console (F12) for more info.");
-      });
-    });
+      }, 1000);
+    }
   </script>
 
 </body>
 </html>
+
