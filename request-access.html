@@ -47,7 +47,7 @@
 <body>
   <div class="form-box">
     <h1>Request Access</h1>
-    <form name="request" method="POST" data-netlify="true">
+    <form name="request" method="POST" data-netlify="true" action="/success.html">
       <input type="text" name="Name" placeholder="Your Name" required />
       <input type="text" name="Phone" placeholder="Your Phone Number" required />
       <input type="email" name="Email" placeholder="Your Email Address" required />
@@ -56,7 +56,7 @@
     </form>
   </div>
 
-  <!-- Hidden form for Netlify to detect fields -->
+  <!-- Hidden form fields for Netlify to detect inputs -->
   <form name="request" netlify hidden>
     <input type="text" name="Name" />
     <input type="text" name="Phone" />
@@ -65,5 +65,4 @@
   </form>
 </body>
 </html>
-
 
