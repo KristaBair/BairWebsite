@@ -2,196 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Request Access - Bair Property</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Request Access</title>
   <style>
-    :root {
-      --primary-dark: #1a1a1a;
-      --accent-green: #4a7c59;
-      --accent-green-light: #88b04b;
-      --text-light: #ffffff;
-      --background-light: #f5f2e7;
-    }
-
     body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--background-light);
-      font-family: Georgia, serif;
-      color: var(--primary-dark);
+      background: linear-gradient(135deg, #1a1a1a 40%, #2e4d35 100%);
+      font-family: Arial, sans-serif;
+      color: #ffffff;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .header {
-      display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      background-color: var(--background-light);
-      border-bottom: 2px solid var(--accent-green);
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
 
-    .logo {
-      height: 100px;
-      width: auto;
-    }
-
-    .menu {
-      position: fixed;
-      top: 80px;
-      right: 20px;
+    .form-box {
       background-color: rgba(0, 0, 0, 0.6);
-      border: 2px solid var(--accent-green);
-      border-radius: 8px;
-      padding: 10px;
-      display: none;
-      z-index: 1000;
-    }
-
-    .menu a {
-      display: block;
-      color: var(--text-light);
-      text-decoration: none;
-      margin: 5px 0;
-    }
-
-    .content {
-      margin: 3rem auto;
+      border: 2px solid #4a7c59;
+      border-radius: 10px;
       padding: 2rem;
-      border: 2px solid var(--accent-green);
-      border-radius: 12px;
-      max-width: 700px;
-      background-color: #ffffff;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(72, 120, 80, 0.6);
     }
 
-    h1 {
-      color: var(--accent-green);
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    label {
-      font-weight: bold;
-      text-align: left;
-    }
-
-    input, select, textarea {
-      padding: 0.6rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-family: Georgia, serif;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    button {
-      background-color: var(--accent-green);
-      color: white;
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
       border: none;
-      padding: 0.75rem;
-      border-radius: 6px;
-      cursor: pointer;
+      border-radius: 5px;
       font-size: 1rem;
     }
 
-    .confirmation {
-      color: green;
-      font-weight: bold;
-      margin-top: 1rem;
-      display: none;
+    button {
+      background-color: #4a7c59;
+      color: white;
+      cursor: pointer;
     }
   </style>
 </head>
-
 <body>
-
-  <!-- Header -->
-  <div class="header">
-    <img src="logo.png" alt="BAIR Logo" class="logo" />
-    <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
-  </div>
-
-  <!-- Menu Links -->
-  <div id="menu" class="menu">
-    <a href="index.html">Home</a>
-    <a href="map.html">Map</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="authorized.html">Authorized Individuals</a>
-    <a href="request-access.html">Request Access</a>
-  </div>
-
-  <!-- Form Content -->
-  <div class="content">
+  <div class="form-box">
     <h1>Request Access</h1>
-    <p>Please fill out the form below to request access to Bair Family Property. You will receive a response after review.</p>
-
-    <form action="https://script.google.com/macros/s/AKfycbxYq1n-Po_u5tcAQbTtjuVySSvcqXV6V6CQztOwNs-7YOqR4IrkGcv0PQsi5eFeyCxc/exec"
-          method="POST"
-          target="hidden_iframe"
-          onsubmit="showConfirmation()">
-      <label for="name">Full Name:</label>
-      <input type="text" id="name" name="Name" required />
-
-      <label for="phone">Cell Phone:</label>
-      <input type="tel" id="phone" name="Phone" placeholder="123-456-7890" required />
-
-      <label for="reason">Reason for Visit:</label>
-      <select id="reason" name="Reason" onchange="toggleCustomReason()" required>
-        <option value="" disabled selected>Select one</option>
-        <option value="Hunting">Hunting</option>
-        <option value="Hiking">Hiking</option>
-        <option value="Fishing">Fishing</option>
-        <option value="Shed Hunting">Shed Hunting</option>
-        <option value="Other">Other (please specify below)</option>
-      </select>
-
-      <textarea id="customReason" name="CustomReason" class="hidden" placeholder="Enter specific reason here..."></textarea>
-
-      <button type="submit">Submit Request</button>
-      <div id="confirmation" class="confirmation">Thank you! Your request has been submitted.</div>
+    <form name="request" method="POST" data-netlify="true">
+      <input type="text" name="Name" placeholder="Your Name" required />
+      <input type="text" name="Phone" placeholder="Your Phone Number" required />
+      <input type="email" name="Email" placeholder="Your Email Address" required />
+      <textarea name="Reason" placeholder="Reason for Visit" required></textarea>
+      <button type="submit">Submit</button>
     </form>
-
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
   </div>
 
-  <!-- JavaScript -->
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
-    }
-
-    function toggleCustomReason() {
-      const reason = document.getElementById("reason").value;
-      const custom = document.getElementById("customReason");
-      if (reason === "Other") {
-        custom.classList.remove("hidden");
-        custom.required = true;
-      } else {
-        custom.classList.add("hidden");
-        custom.required = false;
-      }
-    }
-
-    function showConfirmation() {
-      setTimeout(() => {
-        document.getElementById("confirmation").style.display = "block";
-      }, 1000);
-    }
-  </script>
-
+  <!-- Hidden form for Netlify to detect fields -->
+  <form name="request" netlify hidden>
+    <input type="text" name="Name" />
+    <input type="text" name="Phone" />
+    <input type="email" name="Email" />
+    <textarea name="Reason"></textarea>
+  </form>
 </body>
 </html>
+
 
