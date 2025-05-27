@@ -3,18 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Request Access</title>
+  <title>Request Access - Bair Family Property</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       background: linear-gradient(135deg, #1a1a1a 40%, #2e4d35 100%);
       font-family: Arial, sans-serif;
       color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: #ffffff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .menu {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 2px solid #4a7c59;
+      border-radius: 8px;
+      padding: 10px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .menu a {
+      color: #88b04b;
+      text-decoration: none;
+      display: block;
+      margin: 5px 0;
     }
 
     .form-box {
@@ -22,9 +56,11 @@
       border: 2px solid #4a7c59;
       border-radius: 10px;
       padding: 2rem;
-      width: 90%;
+      text-align: center;
       max-width: 500px;
-      box-shadow: 0 0 10px rgba(72, 120, 80, 0.6);
+      width: 100%;
+      box-shadow: 0 0 15px rgba(72, 120, 80, 0.6);
+      margin-top: 100px;
     }
 
     input, textarea, button {
@@ -37,7 +73,7 @@
       font-size: 1rem;
     }
 
-    button {
+    button[type="submit"] {
       background-color: #4a7c59;
       color: white;
       cursor: pointer;
@@ -45,6 +81,21 @@
   </style>
 </head>
 <body>
+
+  <!-- Menu Button -->
+  <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
+
+  <!-- Dropdown Menu -->
+  <div id="menu" class="menu">
+    <a href="index.html">Home</a>
+    <a href="map.html">Map</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="authorized.html">Authorized Individuals</a>
+    <a href="request-access.html">Request Access</a>
+  </div>
+
+  <!-- Form Box -->
   <div class="form-box">
     <h1>Request Access</h1>
     <form name="request" method="POST" data-netlify="true" action="/success.html">
@@ -56,13 +107,21 @@
     </form>
   </div>
 
-  <!-- Hidden form fields for Netlify to detect inputs -->
+  <!-- Hidden Form for Netlify Detection -->
   <form name="request" netlify hidden>
     <input type="text" name="Name" />
     <input type="text" name="Phone" />
     <input type="email" name="Email" />
     <textarea name="Reason"></textarea>
   </form>
+
+  <!-- Toggle Menu Script -->
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    }
+  </script>
 </body>
 </html>
 
