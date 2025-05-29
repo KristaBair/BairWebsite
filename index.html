@@ -5,44 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BAIR</title>
   <style>
-    :root {
-      --primary-dark: #1a1a1a;
-      --accent-green: #4a7c59;
-      --accent-green-light: #88b04b;
-      --text-light: #ffffff;
-      --overlay-dark: rgba(0, 0, 0, 0.6);
-      --background-light: #f5f2e7; /* MATCHED background */
-    }
-
     body {
       margin: 0;
       padding: 0;
-      background-color: var(--background-light);
-      font-family: Georgia, serif;
-      color: var(--primary-dark);
+      background: linear-gradient(135deg, #1a1a1a 40%, #2e4d35 100%);
+      font-family: Arial, sans-serif;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .header {
-      display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      background-color: var(--background-light);
-      border-bottom: 2px solid var(--accent-green);
-    }
-
-    .logo {
-      height: 100px;
-      width: auto;
+      min-height: 100vh;
+      padding: 2rem;
     }
 
     .menu-toggle {
-      background-color: var(--overlay-dark);
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
       border: none;
-      color: var(--text-light);
+      color: #ffffff;
       padding: 10px 15px;
       border-radius: 5px;
       cursor: pointer;
@@ -51,10 +34,10 @@
 
     .menu {
       position: fixed;
-      top: 80px;
+      top: 60px;
       right: 20px;
-      background-color: var(--overlay-dark);
-      border: 2px solid var(--accent-green);
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 2px solid #4a7c59;
       border-radius: 8px;
       padding: 10px;
       display: none;
@@ -62,44 +45,47 @@
     }
 
     .menu a {
-      color: var(--accent-green-light);
+      color: #88b04b;
       text-decoration: none;
       display: block;
       margin: 5px 0;
     }
 
+    .logo {
+      height: 100px;
+      width: auto;
+      margin-bottom: 1rem;
+    }
+
     .content {
-      margin: 3rem auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 2px solid #4a7c59;
+      border-radius: 10px;
       padding: 2rem;
-      border: 2px solid var(--accent-green);
-      border-radius: 12px;
-      max-width: 700px;
-      background-color: #ffffff;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       text-align: center;
+      max-width: 800px;
+      box-shadow: 0 0 15px rgba(72, 120, 80, 0.6);
+      margin-top: 120px;
     }
 
     h1 {
-      color: var(--accent-green);
+      color: #88b04b;
       margin-bottom: 1rem;
     }
 
     p {
       font-size: 1.1rem;
       line-height: 1.6;
-      color: #333333;
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header with Logo and Menu -->
-  <div class="header">
-    <img src="logo.png" alt="BAIR Logo" class="logo" />
-    <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
-  </div>
+  <!-- Menu Button -->
+  <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
 
-  <!-- Menu Links -->
+  <!-- Dropdown Menu -->
   <div id="menu" class="menu">
     <a href="index.html">Home</a>
     <a href="map.html">Map</a>
@@ -107,16 +93,16 @@
     <a href="contact.html">Contact</a>
     <a href="authorized.html">Authorized Individuals</a>
     <a href="request-access.html">Request Access</a>
-
   </div>
 
   <!-- Main Content -->
   <div class="content">
+    <img src="logo.png" alt="BAIR Logo" class="logo" />
     <h1>Bair Family Property</h1>
     <p>If you are reading this message, you have entered the private property of the Bair family. This land is not open to the public, and unauthorized access is strictly prohibited. By continuing beyond this point, you are trespassing and may be subject to legal consequences. Please respect our privacy and leave immediately.</p>
   </div>
 
-  <!-- JavaScript to Handle Menu Toggle -->
+  <!-- Script for Dropdown Toggle -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById("menu");
